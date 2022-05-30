@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PhoneBook.Model.Entities;
-using System;
+using PhoneBook.Model.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
 {
@@ -31,10 +28,40 @@ namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
 
             builder.HasData(new User
             {
-                ID=1,
-                FirstName="Test1",
-                LastName="Test2",
-                Company="Rise Technology"
+                ID = 1,
+                FirstName = "Test1",
+                LastName = "Test1",
+                Company = "Test1",
+                Contacts = new List<Contact>()
+                {
+                    new Contact()
+                    {
+                       ID=1,
+                       InfoType=InfoType.Location,
+                       InfoContent="Istanbul"
+                    },
+
+                    new Contact()
+                    {
+                       ID=2,
+                       InfoType=InfoType.Location,
+                       InfoContent="Izmir"
+                    },
+
+                    new Contact()
+                    {
+                       ID=3,
+                       InfoType=InfoType.EmailAddress,
+                       InfoContent="test@test.com"
+                    },
+
+                    new Contact()
+                    {
+                       ID=1,
+                       InfoType=InfoType.PhoneNumber,
+                       InfoContent="11111111111"
+                    }
+                }
             });
         }
     }

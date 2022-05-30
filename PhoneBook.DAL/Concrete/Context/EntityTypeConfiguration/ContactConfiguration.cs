@@ -2,11 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PhoneBook.Model.Entities;
 using PhoneBook.Model.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
 {
@@ -30,7 +25,8 @@ namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
             {
                 ID = 1,
                 InfoType = InfoType.Location,
-                InfoContent = "Istanbul"
+                InfoContent = "Istanbul",
+                UserID=1
             });
         }
     }

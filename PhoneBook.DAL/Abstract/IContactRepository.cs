@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.DAL.Abstract
 {
-    interface IContactRepository : IRepository<Contact>
+    public interface IContactRepository : IRepository<Contact>
     {
     }
 }

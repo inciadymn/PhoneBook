@@ -1,4 +1,5 @@
 ﻿using PhoneBook.BLL.Abstract;
+using PhoneBook.DAL.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace PhoneBook.BLL.Concrete
 {
     public class UserService : IUserService
     {
-        IUserDAL userRepository;
-        public UserService(IUserDAL userRepository)
+        IUserRepository userRepository;
+        public UserService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }
