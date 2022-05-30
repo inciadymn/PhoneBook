@@ -8,7 +8,7 @@ namespace PhoneBook.Model.Enums
 {
     public enum InfoType
     {
-        Phonenumber=1,
+        PhoneNumber=1,
         EmailAddress,
         Location
     }
