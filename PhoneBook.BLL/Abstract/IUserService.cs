@@ -10,6 +10,6 @@ namespace PhoneBook.BLL.Abstract
         ResultService<UserDto> Insert(UserDto user);
         ResultService<bool> Update(UserDto user, int id);
         public ResultService<bool> Delete(int id);
-        ResultService<List<GetAllUserDto>> GetUsers();
+        ResultService<List<GetAllUserDto>> GetAllUsers();
     }
 }

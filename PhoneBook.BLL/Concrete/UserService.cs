@@ -115,7 +115,7 @@ namespace PhoneBook.BLL.Concrete
             }
         }
 
-        public ResultService<List<GetAllUserDto>> GetUsers()
+        public ResultService<List<GetAllUserDto>> GetAllUsers()
         {
             ResultService<List<GetAllUserDto>> result = new ResultService<List<GetAllUserDto>>();
 
@@ -144,5 +144,37 @@ namespace PhoneBook.BLL.Concrete
                 return result;
             }
         }
+
+        //bir user a ait bilgiler ve iletişim bilgilerini getirme
+        //public ResultService<GetUserDto> GetUser(int id)
+        //{
+        //    ResultService<GetUserDto> result = new ResultService<GetUserDto>();
+
+        //    try
+        //    {
+        //        GetUserDto user = userRepository.GetAll(a=>a.ID==id).Select(user => new GetUserDto
+        //        {
+        //            ID = user.ID,
+        //            FirstName = user.FirstName,
+        //            LastName = user.LastName,
+        //            Company = user.Company,
+        //            Contacts=user.Contacts  
+        //        }).SingleOrDefault();
+
+        //        if (user == null)
+        //        {
+        //            result.AddError("Null Error", "No such user found");
+        //            return result;
+        //        }
+
+        //        result.Data = user;
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.AddError("Exception", ex.Message);
+        //        return result;
+        //    }
+        //}
     }
 }

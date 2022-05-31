@@ -77,7 +77,7 @@ namespace PhoneBook.API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            ResultService<List<GetAllUserDto>> result = userService.GetUsers();
+            ResultService<List<GetAllUserDto>> result = userService.GetAllUsers();
             if (result.HasError)
             {
                 return BadRequest(result.Errors);
