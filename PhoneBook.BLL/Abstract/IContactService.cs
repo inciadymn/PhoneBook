@@ -6,6 +6,6 @@ namespace PhoneBook.BLL.Abstract
 {
     public interface IContactService : IBaseService<Contact>
     {
-        ResultService<ContactDto> Insert(ContactDto contact, int id);
+        ResultService<ContactCreateDto> Insert(ContactCreateDto contact, int id);
     }
 }

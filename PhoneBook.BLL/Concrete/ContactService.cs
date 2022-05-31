@@ -4,10 +4,6 @@ using PhoneBook.DAL.Abstract;
 using PhoneBook.Model.Dto;
 using PhoneBook.Model.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhoneBook.BLL.Concrete
 {
@@ -19,18 +15,18 @@ namespace PhoneBook.BLL.Concrete
             this.contactRepository = contactRepository;
         }
 
-        public ResultService<ContactDto> Insert(ContactDto contact, int id)
+        public ResultService<ContactCreateDto> Insert(ContactCreateDto contact, int id)
         {
-            ResultService<ContactDto> contactResult = new ResultService<ContactDto>();
+            ResultService<ContactCreateDto> contactResult = new ResultService<ContactCreateDto>();
 
             try
             {
                 Contact addedContact = contactRepository.Add(
                     new Contact
                     {
-                        InfoContent=contact.InfoContent,
-                        InfoType=contact.InfoType,
-                        UserID=id
+                        InfoContent = contact.InfoContent,
+                        InfoType = contact.InfoType,
+                        UserID = id
                     });
 
                 if (addedContact == null)

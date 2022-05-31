@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.API.Controllers
 {
-    [Route("api/user/[controller]")]
+    [Route("api/contact")]
     [ApiController]
     public class ContactController : ControllerBase
     {
@@ -20,12 +20,12 @@ namespace PhoneBook.API.Controllers
             this.contactService = contactService;
         }
 
-        [HttpPost("{id:int}")]
-        public IActionResult Insert([FromBody]ContactDto contact, [FromRoute]int id)
+        [HttpPost("user/{id:int}")]
+        public IActionResult Insert([FromBody]ContactCreateDto contact, [FromRoute]int id)
         {
             if (ModelState.IsValid)
             {
-                ResultService<ContactDto> result = contactService.Insert(contact, id);
+                ResultService<ContactCreateDto> result = contactService.Insert(contact, id);
 
                 if (result.HasError)
                 {

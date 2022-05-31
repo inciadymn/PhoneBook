@@ -83,7 +83,20 @@ namespace PhoneBook.API.Controllers
                 return BadRequest(result.Errors);
             }
 
-            return Ok();
+            return Ok(result.Data);
+        }
+
+        [HttpGet("{id:int}")]
+        public IActionResult GetUserContacts([FromRoute]int id)
+        {
+            ResultService<GetUserContactsDto> result = userService.GetUserContacts(id);
+
+            if (result.HasError)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok(result.Data);
         }
     }
 }

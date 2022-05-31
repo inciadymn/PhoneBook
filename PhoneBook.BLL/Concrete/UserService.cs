@@ -121,15 +121,15 @@ namespace PhoneBook.BLL.Concrete
 
             try
             {
-                List<GetAllUserDto> users = userRepository.GetAll().Select(user=>new GetAllUserDto 
-                { 
-                  ID=user.ID,
-                  FirstName=user.FirstName,
-                  LastName=user.LastName,
-                  Company=user.Company
+                List<GetAllUserDto> users = userRepository.GetAll().Select(user => new GetAllUserDto
+                {
+                    ID = user.ID,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Company = user.Company
                 }).ToList();
 
-                if (users==null)
+                if (users == null)
                 {
                     result.AddError("Null Error", "Operation failed");
                     return result;
@@ -145,36 +145,48 @@ namespace PhoneBook.BLL.Concrete
             }
         }
 
-        //bir user a ait bilgiler ve iletişim bilgilerini getirme
-        //public ResultService<GetUserDto> GetUser(int id)
-        //{
-        //    ResultService<GetUserDto> result = new ResultService<GetUserDto>();
+        public ResultService<GetUserContactsDto> GetUserContacts(int id)
+        {
+            ResultService<GetUserContactsDto> result = new ResultService<GetUserContactsDto>();
 
-        //    try
-        //    {
-        //        GetUserDto user = userRepository.GetAll(a=>a.ID==id).Select(user => new GetUserDto
-        //        {
-        //            ID = user.ID,
-        //            FirstName = user.FirstName,
-        //            LastName = user.LastName,
-        //            Company = user.Company,
-        //            Contacts=user.Contacts  
-        //        }).SingleOrDefault();
+            try
+            {
+                User user = userRepository.GetAll(a => a.ID == id, a => a.Contacts).SingleOrDefault();
 
-        //        if (user == null)
-        //        {
-        //            result.AddError("Null Error", "No such user found");
-        //            return result;
-        //        }
+                if (user == null)
+                {
+                    result.AddError("Null Error", "No such user found");
+                    return result;
+                }
 
-        //        result.Data = user;
-        //        return result;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.AddError("Exception", ex.Message);
-        //        return result;
-        //    }
-        //}
+                GetUserContactsDto userContact = new GetUserContactsDto()
+                {
+                    ID = user.ID,
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName
+                };
+
+                if (user.Contacts.Count > 0)
+                {
+                    userContact.Contacts = new List<ContactDto>();
+
+                    userContact.Contacts.AddRange(user.Contacts.Select(a => new ContactDto()
+                    {
+                        InfoContent = a.InfoContent,
+                        InfoType = a.InfoType.ToString(),
+                        UserID = a.UserID
+                    }).ToList()); 
+                }
+
+                result.Data = userContact;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.AddError("Exception", ex.Message);
+                return result;
+            }
+        }
     }
 }
