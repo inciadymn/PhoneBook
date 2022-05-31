@@ -29,4 +29,3 @@ namespace PhoneBook.BLL.Concrete.ResultServiceBLL
         public string ErrorMessage { get; set; }
     }
 }
-}
