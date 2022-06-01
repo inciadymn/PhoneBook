@@ -9,7 +9,7 @@ using PhoneBook.DAL.Concrete.Context;
 namespace PhoneBook.DAL.Migrations
 {
     [DbContext(typeof(PhoneBookDbContext))]
-    [Migration("20220601100633_Initial")]
+    [Migration("20220601150816_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,14 +52,14 @@ namespace PhoneBook.DAL.Migrations
                         new
                         {
                             ID = 1,
-                            InfoContent = "Istanbul",
+                            InfoContent = "istanbul",
                             InfoType = "Location",
                             UserID = 1
                         },
                         new
                         {
                             ID = 2,
-                            InfoContent = "Izmir",
+                            InfoContent = "izmir",
                             InfoType = "Location",
                             UserID = 1
                         },

@@ -5,6 +5,8 @@ using PhoneBook.Model.Dto;
 using PhoneBook.Model.Entities;
 using PhoneBook.Model.Enums;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PhoneBook.BLL.Concrete
 {
@@ -22,7 +24,7 @@ namespace PhoneBook.BLL.Concrete
 
             try
             {
-                if (!Enum.IsDefined(typeof(InfoType),contact.InfoType))
+                if (!Enum.IsDefined(typeof(InfoType), contact.InfoType))
                 {
                     contactResult.AddError("Insert Error", "InfoType is not valid");
                     return contactResult;
@@ -31,7 +33,7 @@ namespace PhoneBook.BLL.Concrete
                 Contact addedContact = contactRepository.Add(
                     new Contact
                     {
-                        InfoContent = contact.InfoContent,
+                        InfoContent = contact.InfoContent.ToLower(),
                         InfoType = contact.InfoType,
                         UserID = id
                     });
@@ -74,6 +76,49 @@ namespace PhoneBook.BLL.Concrete
                 }
 
                 result.Data = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.AddError("Exception", ex.Message);
+                return result;
+            }
+        }
+
+        public ResultService<List<ReportDto>> GetReport()
+        {
+            ResultService<List<ReportDto>> result = new ResultService<List<ReportDto>>();
+
+            try
+            {
+                List<Contact> contacts = contactRepository.GetAll().ToList();
+
+                if (contacts.Count == 0)
+                {
+                    result.AddError("Null Error", "No Contacts exist");
+                    return result;
+                }
+
+                var locations = contacts.Where(a => a.InfoType == InfoType.Location.ToString())
+                                      .GroupBy(a => a.InfoContent)
+                                      .Select(group => new ReportDto()
+                                      {
+                                          Location = group.Key,
+                                          LocationCount = group.Count()
+                                      })
+                                      .OrderByDescending(a => a.LocationCount)
+                                      .ToList();
+
+                foreach (var location in locations)
+                {
+                    var userIds = contacts.Where(a => a.InfoContent == location.Location).Select(a => a.UserID).Distinct().ToList();
+
+                    location.UserCount = userIds.Count();
+
+                    location.NumberCount = contacts.Where(a => userIds.Contains(a.UserID) && a.InfoType == InfoType.PhoneNumber.ToString()).Count();
+                }
+
+                result.Data = locations;
                 return result;
             }
             catch (Exception ex)

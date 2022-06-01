@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PhoneBook.BLL.Abstract;
 using PhoneBook.BLL.Concrete.ResultServiceBLL;
 using PhoneBook.Model.Dto;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PhoneBook.API.Controllers
 {
@@ -21,7 +17,7 @@ namespace PhoneBook.API.Controllers
         }
 
         [HttpPost("user/{id:int}")]
-        public IActionResult Insert([FromBody]ContactCreateDto contact, [FromRoute]int id)
+        public IActionResult Insert([FromBody] ContactCreateDto contact, [FromRoute] int id)
         {
             if (ModelState.IsValid)
             {
@@ -51,6 +47,24 @@ namespace PhoneBook.API.Controllers
                 }
 
                 return Ok();
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [HttpGet("report")]
+        public IActionResult Report()
+        {
+            if (ModelState.IsValid)
+            {
+                ResultService<List<ReportDto>> result = contactService.GetReport();
+
+                if (result.HasError)
+                {
+                    return BadRequest(result.Errors);
+                }
+
+                return Ok(result.Data);
             }
 
             return BadRequest(ModelState);

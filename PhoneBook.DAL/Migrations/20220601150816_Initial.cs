@@ -52,8 +52,8 @@ namespace PhoneBook.DAL.Migrations
                 columns: new[] { "ID", "InfoContent", "InfoType", "UserID" },
                 values: new object[,]
                 {
-                    { 1, "Istanbul", "Location", 1 },
-                    { 2, "Izmir", "Location", 1 },
+                    { 1, "istanbul", "Location", 1 },
+                    { 2, "izmir", "Location", 1 },
                     { 3, "test@test.com", "EmailAddress", 1 },
                     { 4, "11111111111", "PhoneNumber", 1 }
                 });

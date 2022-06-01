@@ -28,7 +28,7 @@ namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
                 {
                    ID=1,
                    InfoType=InfoType.Location.ToString(),
-                   InfoContent="Istanbul",
+                   InfoContent="istanbul",
                    UserID=1
                 },
 
@@ -36,7 +36,7 @@ namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
                 {
                    ID=2,
                    InfoType=InfoType.Location.ToString(),
-                   InfoContent="Izmir",
+                   InfoContent="izmir",
                    UserID=1
                 },
 

@@ -50,14 +50,14 @@ namespace PhoneBook.DAL.Migrations
                         new
                         {
                             ID = 1,
-                            InfoContent = "Istanbul",
+                            InfoContent = "istanbul",
                             InfoType = "Location",
                             UserID = 1
                         },
                         new
                         {
                             ID = 2,
-                            InfoContent = "Izmir",
+                            InfoContent = "izmir",
                             InfoType = "Location",
                             UserID = 1
                         },

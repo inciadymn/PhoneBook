@@ -9,6 +9,8 @@ namespace PhoneBook.Model.Dto
     public class ReportDto
     {
         public string Location { get; set; }
-        public string Number { get; set; }
+        public int LocationCount { get; set; }
+        public int UserCount { get; set; }
+        public int NumberCount { get; set; }
     }
 }
