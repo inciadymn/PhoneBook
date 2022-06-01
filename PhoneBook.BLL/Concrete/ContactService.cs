@@ -13,9 +13,13 @@ namespace PhoneBook.BLL.Concrete
     public class ContactService : IContactService
     {
         IContactRepository contactRepository;
-        public ContactService(IContactRepository contactRepository)
+
+        IUserRepository userRepository;
+
+        public ContactService(IContactRepository contactRepository, IUserRepository userRepository)
         {
             this.contactRepository = contactRepository;
+            this.userRepository = userRepository;
         }
 
         public ResultService<ContactCreateDto> Insert(ContactCreateDto contact, int id)
@@ -27,6 +31,12 @@ namespace PhoneBook.BLL.Concrete
                 if (!Enum.IsDefined(typeof(InfoType), contact.InfoType))
                 {
                     contactResult.AddError("Insert Error", "InfoType is not valid");
+                    return contactResult;
+                }
+
+                if(userRepository.Get(a=>a.ID == id) == null)
+                {
+                    contactResult.AddError("Insert Error", "User not found");
                     return contactResult;
                 }
 
