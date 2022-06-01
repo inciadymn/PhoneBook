@@ -60,13 +60,11 @@ namespace PhoneBook.BLL.Concrete
                     return result;
                 }
 
-                User updateUser = userRepository.Update(
-                    new User
-                    {
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Company = user.Company
-                    });
+                userResult.FirstName = user.FirstName;
+                userResult.LastName = user.LastName;
+                userResult.Company = user.Company;
+
+                User updateUser = userRepository.Update(userResult);
 
                 if (updateUser == null)
                 {
@@ -173,10 +171,10 @@ namespace PhoneBook.BLL.Concrete
 
                     userContact.Contacts.AddRange(user.Contacts.Select(a => new ContactDto()
                     {
+                        ID = a.ID,
                         InfoContent = a.InfoContent,
                         InfoType = a.InfoType.ToString(),
-                        UserID = a.UserID
-                    }).ToList()); 
+                    }).ToList());
                 }
 
                 result.Data = userContact;

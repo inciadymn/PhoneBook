@@ -10,7 +10,7 @@ namespace PhoneBook.Model.Entities
 {
     public class Contact : BaseEntity
     {
-        public InfoType InfoType { get; set; }
+        public string InfoType { get; set; }
         public string InfoContent { get; set; }
         public int UserID { get; set; }
         public User User { get; set; }

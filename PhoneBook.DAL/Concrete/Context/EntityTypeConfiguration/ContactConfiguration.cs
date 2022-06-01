@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PhoneBook.Model.Entities;
 using PhoneBook.Model.Enums;
+using System.Collections.Generic;
 
 namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
 {
@@ -17,17 +18,44 @@ namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
                 .HasMaxLength(150)
                 .IsRequired();
 
-            builder.HasOne(a => a.User)
-                   .WithMany(a => a.Contacts)
-                   .HasForeignKey(a => a.UserID);
+            builder.Property(a => a.InfoType)
+               .HasMaxLength(150)
+               .IsRequired();
 
-            builder.HasData(new Contact
+            builder.HasData(new List<Contact>()
             {
-                ID = 1,
-                InfoType = InfoType.Location,
-                InfoContent = "Istanbul",
-                UserID=1
-            });
+                new Contact()
+                {
+                   ID=1,
+                   InfoType=InfoType.Location.ToString(),
+                   InfoContent="Istanbul",
+                   UserID=1
+                },
+
+                new Contact()
+                {
+                   ID=2,
+                   InfoType=InfoType.Location.ToString(),
+                   InfoContent="Izmir",
+                   UserID=1
+                },
+
+                new Contact()
+                {
+                   ID=3,
+                   InfoType=InfoType.EmailAddress.ToString(),
+                   InfoContent="test@test.com",
+                   UserID=1
+                },
+
+                new Contact()
+                {
+                   ID=4,
+                   InfoType=InfoType.PhoneNumber.ToString(),
+                   InfoContent="11111111111",
+                   UserID=1
+                }
+            }) ;
         }
     }
 }

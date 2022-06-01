@@ -37,5 +37,23 @@ namespace PhoneBook.API.Controllers
 
             return BadRequest(ModelState);
         }
+
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            if (ModelState.IsValid)
+            {
+                ResultService<bool> result = contactService.Delete(id);
+
+                if (result.HasError)
+                {
+                    return BadRequest(result.Errors);
+                }
+
+                return Ok();
+            }
+
+            return BadRequest(ModelState);
+        }
     }
 }

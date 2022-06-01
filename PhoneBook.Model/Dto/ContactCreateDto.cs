@@ -9,10 +9,8 @@ namespace PhoneBook.Model.Dto
 {
     public class ContactCreateDto
     {
-        public InfoType InfoType { get; set; }
+        public string InfoType { get; set; }
 
         public string InfoContent { get; set; }
-
-        public int UserID { get; set; }
     }
 }

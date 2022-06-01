@@ -26,43 +26,17 @@ namespace PhoneBook.DAL.Concrete.Context.EntityTypeConfiguration
                 .HasMaxLength(100)
                 .IsRequired();
 
+            builder.HasMany(a => a.Contacts)
+                .WithOne(a => a.User)
+                .HasForeignKey(a => a.UserID);
+
             builder.HasData(new User
             {
                 ID = 1,
                 FirstName = "Test1",
                 LastName = "Test1",
                 Company = "Test1",
-                Contacts = new List<Contact>()
-                {
-                    new Contact()
-                    {
-                       ID=1,
-                       InfoType=InfoType.Location,
-                       InfoContent="Istanbul"
-                    },
-
-                    new Contact()
-                    {
-                       ID=2,
-                       InfoType=InfoType.Location,
-                       InfoContent="Izmir"
-                    },
-
-                    new Contact()
-                    {
-                       ID=3,
-                       InfoType=InfoType.EmailAddress,
-                       InfoContent="test@test.com"
-                    },
-
-                    new Contact()
-                    {
-                       ID=1,
-                       InfoType=InfoType.PhoneNumber,
-                       InfoContent="11111111111"
-                    }
-                }
-            });
+            }); 
         }
     }
 }

@@ -10,15 +10,15 @@ namespace PhoneBook.Model.Dto
     public class UserDto
     {
         [Required(ErrorMessage = "{0} is required")]
-        [StringLength(50, ErrorMessage = "max 50 character", MinimumLength = 2)]
+        [StringLength(50, ErrorMessage = "Please enter a minimum of 2 characters and a maximum of 50 characters", MinimumLength = 2)]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
-        [StringLength(50, ErrorMessage = "max 50 character", MinimumLength = 2)]
+        [StringLength(50, ErrorMessage = "Please enter a minimum of 2 characters and a maximum of 50 characters", MinimumLength = 2)]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
-        [StringLength(100, ErrorMessage = "max 100 character", MinimumLength = 2)]
+        [StringLength(100, ErrorMessage = "Please enter a minimum of 2 characters and a maximum of 50 characters", MinimumLength = 2)]
         public string Company { get; set; }
     }
 }

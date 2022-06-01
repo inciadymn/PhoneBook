@@ -3,6 +3,7 @@ using PhoneBook.BLL.Concrete.ResultServiceBLL;
 using PhoneBook.DAL.Abstract;
 using PhoneBook.Model.Dto;
 using PhoneBook.Model.Entities;
+using PhoneBook.Model.Enums;
 using System;
 
 namespace PhoneBook.BLL.Concrete
@@ -21,6 +22,12 @@ namespace PhoneBook.BLL.Concrete
 
             try
             {
+                if (!Enum.IsDefined(typeof(InfoType),contact.InfoType))
+                {
+                    contactResult.AddError("Insert Error", "InfoType is not valid");
+                    return contactResult;
+                }
+
                 Contact addedContact = contactRepository.Add(
                     new Contact
                     {
@@ -43,6 +50,37 @@ namespace PhoneBook.BLL.Concrete
             }
 
             return contactResult;
+        }
+
+        public ResultService<bool> Delete(int id)
+        {
+            ResultService<bool> result = new ResultService<bool>();
+
+            try
+            {
+                Contact contact = contactRepository.Get(a => a.ID == id);
+                if (contact == null)
+                {
+                    result.AddError("Null Error", "Contact information not found");
+                    return result;
+                }
+
+                int deleteContact = contactRepository.Remove(contact);
+
+                if (deleteContact == 0)
+                {
+                    result.AddError("Deletion Error", "Deletion failed");
+                    return result;
+                }
+
+                result.Data = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.AddError("Exception", ex.Message);
+                return result;
+            }
         }
     }
 }
