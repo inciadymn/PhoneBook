@@ -88,7 +88,7 @@ namespace PhoneBook.Test.ControllerTests
         public void UserController_Delete_ShouldReturnOk()
         {
             //Arrange
-            var userServiceMock = new Mock<IUserService>(); ;
+            var userServiceMock = new Mock<IUserService>(); 
 
             userServiceMock
                 .Setup(a => a.Delete(1))
@@ -105,6 +105,34 @@ namespace PhoneBook.Test.ControllerTests
 
             //Assert
             Assert.IsType<OkResult>(result);
+        }
+
+        [Fact]
+        public void UserController_Delete_ShouldReturnBadRequest()
+        {
+            var userServiceMock = new Mock<IUserService>();
+
+            userServiceMock
+                .Setup(a => a.Delete(1))
+                .Returns(new ResultService<bool>()
+                {
+                    Data=false,
+                    HasError=true,
+                    Errors= new List<ErrorItem>()
+                    {
+                        new ErrorItem()
+                        {
+                            ErrorType="Deletion Error", 
+                            ErrorMessage="Deletion failed"
+                        }
+                    }
+                });
+
+            var userController = CreateInstance(userServiceMock);
+
+            var result = userController.Delete(1);
+
+            Assert.IsType<BadRequestObjectResult>(result);
         }
 
         [Fact]
